@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panorama boletos knockout 2026</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #17201d;
+      --muted: #64706b;
+      --line: #dfe6e1;
+      --soft: #f5f8f6;
+      --green: #0f6f4f;
+      --green-2: #dff4e9;
+      --amber: #946200;
+      --amber-2: #fff0c8;
+      --red: #a43d34;
+      --red-2: #fde2dd;
+      --blue: #1f5f93;
+      --blue-2: #dfedfb;
+      --shadow: 0 20px 60px rgba(23, 32, 29, 0.08);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .shell {
+      width: min(1280px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0f6f4f, #1f5f93);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+      flex: 0 0 auto;
+    }
+
+    .brand strong {
+      font-size: 16px;
+      line-height: 1.1;
+      display: block;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+      display: block;
+      margin-top: 3px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .navlink, .button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      min-height: 36px;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 650;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    main {
+      padding: 38px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.98;
+      letter-spacing: 0;
+      max-width: 880px;
+      overflow-wrap: break-word;
+    }
+
+    .lead {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 760px;
+    }
+
+    .hero-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      align-self: start;
+    }
+
+    .hero-panel h2, .section-head h2 {
+      font-size: 16px;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 96px;
+    }
+
+    .metric b {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+      display: block;
+    }
+
+    .notice {
+      border: 1px solid var(--amber-2);
+      background: #fff9e8;
+      color: #4b3600;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 16px 0 0;
+      font-size: 13px;
+    }
+
+    .toolbar {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 28px 0 14px;
+      background: #fff;
+    }
+
+    .filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .filter.active {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .search {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 38px;
+      padding: 8px 12px;
+      font-size: 13px;
+      min-width: min(330px, 100%);
+    }
+
+    .table-wrap {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      box-shadow: var(--shadow);
+      background: #fff;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 1040px;
+    }
+
+    th {
+      background: #f1f5f2;
+      color: #4a5752;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+    tr:hover td { background: #fbfdfb; }
+
+    .event {
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .stack {
+      display: grid;
+      gap: 4px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 25px;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .ok { background: var(--green-2); color: var(--green); }
+    .warn { background: var(--amber-2); color: var(--amber); }
+    .bad { background: var(--red-2); color: var(--red); }
+    .info { background: var(--blue-2); color: var(--blue); }
+    .plain { background: #eef2f0; color: #53605a; }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 180px;
+    }
+
+    .actions a {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 750;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .actions a.main {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .section {
+      margin-top: 34px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 640px;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .source {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+      min-height: 156px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .source h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+    }
+
+    .source p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .source a {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: var(--soft);
+    }
+
+    .note h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .note p, .note li {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .note ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 5px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 0 34px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .source-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .notes { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: calc(100% - 22px); max-width: 368px; }
+      .topbar { align-items: flex-start; flex-direction: column; padding: 14px 0; }
+      nav { justify-content: flex-start; }
+      main { padding-top: 26px; }
+      h1 { font-size: 26px; line-height: 1.12; max-width: 100%; }
+      .lead { font-size: 17px; }
+      .notice { font-size: 12px; }
+      .metric-grid, .source-grid { grid-template-columns: 1fr; }
+      .toolbar { align-items: stretch; }
+      .search { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell topbar">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <strong>Panorama boletos knockout 2026</strong>
+          <span>Actualizado: 19 junio 2026 · precios por boleto en USD</span>
+        </div>
+      </div>
+      <nav aria-label="Navegación">
+        <a class="navlink" href="#tabla">Tabla</a>
+        <a class="navlink" href="#fuentes">Sistemas</a>
+        <a class="button primary" href="https://fwc26-resale-usd.tickets.fifa.com/" target="_blank" rel="noreferrer">FIFA Resale</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero" aria-labelledby="titulo">
+      <div>
+        <h1 id="titulo">5 boletos para LA y Azteca, con foco en USD 2,000-2,500.</h1>
+        <p class="lead">
+          La lectura rápida: el mejor encaje del rango es el cuarto de final en Los Ángeles
+          por FIFA Collect CAT2. El 8vo en Azteca aparece arriba del rango en el inventario
+          visible; las dos eliminatorias tempranas de LA están muy por debajo del rango.
+        </p>
+        <div class="notice">
+          Interpreto “2k a 2.5k” como USD por boleto. Si el rango era MXN, no hay opciones
+          viables de knockout en los sistemas visibles. Para cinco boletos juntos, ningún
+          precio queda confirmado hasta checkout con cantidad 5 y regla “sin separación”.
+        </div>
+      </div>
+
+      <aside class="hero-panel" aria-label="Resumen ejecutivo">
+        <h2>Resumen ejecutivo</h2>
+        <div class="metric-grid">
+          <div class="metric">
+            <b>4</b>
+            <span>Partidos objetivo: 1 Azteca, 3 LA.</span>
+          </div>
+          <div class="metric">
+            <b>1</b>
+            <span>Opción fuerte dentro/cerca del rango: LA cuarto CAT2.</span>
+          </div>
+          <div class="metric">
+            <b>0</b>
+            <span>8vos programados en LA; solo R32 y 4to.</span>
+          </div>
+          <div class="metric">
+            <b>5</b>
+            <span>Boletos: requiere verificar contigüidad en checkout.</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="tabla" class="section" aria-labelledby="tabla-titulo">
+      <div class="section-head">
+        <div>
+          <h2 id="tabla-titulo">Tabla principal</h2>
+          <p>Precios visibles en FIFA Collect Info / marketplace. En secundarios sin precio público confiable se deja URL de búsqueda directa.</p>
+        </div>
+      </div>
+
+      <div class="toolbar" aria-label="Filtros de tabla">
+        <div class="filters">
+          <button class="filter active" data-filter="all">Todo</button>
+          <button class="filter" data-filter="la">Los Angeles</button>
+          <button class="filter" data-filter="azteca">Azteca</button>
+          <button class="filter" data-filter="target">En rango</button>
+          <button class="filter" data-filter="watch">Vigilar</button>
+        </div>
+        <input class="search" id="search" type="search" placeholder="Buscar por partido, sede o estado">
+      </div>
+
+      <div class="table-wrap" role="region" aria-label="Panorama de precios" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Sede</th>
+              <th>Partido</th>
+              <th>Fuente / categoría</th>
+              <th>Precio visible</th>
+              <th>5 boletos juntos</th>
+              <th>Encaje</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr data-tags="azteca watch above fifa collect round16 m92">
+              <td>
+                <div class="event">Azteca · CDMX</div>
+                <div class="sub">Estadio Azteca / Banorte</div>
+              </td>
+              <td>
+                <div class="event">M92 · 8vo de final</div>
+                <div class="sub">W79 vs W80 · 5 julio 2026 · 6:00 PM local</div>
+              </td>
+              <td>
+                <div class="stack">
+                  <strong>FIFA Collect CAT1</strong>
+                  <span class="sub">Supply 79 · face value USD 695 · última venta USD 2,715</span>
+                </div>
+              </td>
+              <td>
+                <div class="price">USD 2,999</div>
+                <div class="sub">Aprox. USD 14,995 por 5 antes de cargos.</div>
+              </td>
+              <td>
+                <span class="chip warn">No confirmado</span>
+                <div class="sub">Mercado por categoría; revisar qty 5 y asientos al comprar.</div>
+              </td>
+              <td>
+                <span class="chip bad">Arriba de rango</span>
+                <div class="sub">Necesita caída de al menos USD 499 por boleto.</div>
+              </td>
+              <td>
+                <div class="actions">
+                  <a class="main" href="https://collect.fifa.com/marketplace?tags=cat1-m92&referrer=walix" target="_blank" rel="noreferrer">Collect M92</a>
+                  <a href="https://fwc26-resale-usd.tickets.fifa.com/" target="_blank" rel="noreferrer">FIFA Resale</a>
+                  <a href="https://seatpick.com/search?search=FIFA%20World%20Cup%202026%20Match%2092" target="_blank" rel="noreferrer">SeatPick</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr data-tags="la below fifa collect round32 m73">
+              <td>
+                <div class="event">Los Angeles</div>
+                <div class="sub">SoFi Stadium · Inglewood</div>
+              </td>
+              <td>
+                <div class="event">M73 · Round of 32</div>
+                <div class="sub">2A vs 2B · 28 junio 2026 · 12:00 PM local</div>
+              </td>
+              <td>
+                <div class="stack">
+                  <strong>FIFA Collect CAT2 / CAT1</strong>
+                  <span class="sub">CAT2 supply 233 · CAT1 supply 172</span>
+                </div>
+              </td>
+              <td>
+                <div class="price">USD 780-874</div>
+                <div class="sub">Aprox. USD 3,900-4,370 por 5 antes de cargos.</div>
+              </td>
+              <td>
+                <span class="chip info">Probable, no probado</span>
+                <div class="sub">Inventario alto; contigüidad se confirma en checkout.</div>
+              </td>
+              <td>
+                <span class="chip plain">Debajo del rango</span>
+                <div class="sub">No es 8vo ni 4to; buena opción si aceptan R32.</div>
+              </td>
+              <td>
+                <div class="actions">
+                  <a class="main" href="https://collect.fifa.com/marketplace?tags=cat2-m73&referrer=walix" target="_blank" rel="noreferrer">Collect CAT2</a>
+                  <a href="https://collect.fifa.com/marketplace?tags=cat1-m73&referrer=walix" target="_blank" rel="noreferrer">CAT1</a>
+                  <a href="https://seatpick.com/search?search=FIFA%20World%20Cup%202026%20Match%2073" target="_blank" rel="noreferrer">SeatPick</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr data-tags="la below fifa collect round32 m84">
+              <td>
+                <div class="event">Los Angeles</div>
+                <div class="sub">SoFi Stadium · Inglewood</div>
+              </td>
+              <td>
+                <div class="event">M84 · Round of 32</div>
+                <div class="sub">1H vs 2J · 2 julio 2026 · 12:00 PM local</div>
+              </td>
+              <td>
+                <div class="stack">
+                  <strong>FIFA Collect CAT2 / CAT1</strong>
+                  <span class="sub">CAT2 supply 249 · CAT1 supply 152</span>
+                </div>
+              </td>
+              <td>
+                <div class="price">USD 700-1,200</div>
+                <div class="sub">Aprox. USD 3,500-6,000 por 5 antes de cargos.</div>
+              </td>
+              <td>
+                <span class="chip info">Probable, no probado</span>
+                <div class="sub">Inventario alto; revisar que no haya split al comprar.</div>
+              </td>
+              <td>
+                <span class="chip plain">Debajo del rango</span>
+                <div class="sub">Puede ser buena compra de valor, pero no es 8vo/4to.</div>
+              </td>
+              <td>
+                <div class="actions">
+                  <a class="main" href="https://collect.fifa.com/marketplace?tags=cat2-m84&referrer=walix" target="_blank" rel="noreferrer">Collect CAT2</a>
+                  <a href="https://collect.fifa.com/marketplace?tags=cat1-m84&referrer=walix" target="_blank" rel="noreferrer">CAT1</a>
+                  <a href="https://seatpick.com/search?search=FIFA%20World%20Cup%202026%20Match%2084" target="_blank" rel="noreferrer">SeatPick</a>
+                </div>
+              </td>
+            </tr>
+
+            <tr data-tags="la target fifa collect quarter m98">
+              <td>
+                <div class="event">Los Angeles</div>
+                <div class="sub">SoFi Stadium · Inglewood</div>
+              </td>
+              <td>
+                <div class="event">M98 · Cuarto de final</div>
+                <div class="sub">W93 vs W94 · 10 julio 2026 · 12:00 PM local</div>
+              </td>
+              <td>
+                <div class="stack">
+                  <strong>FIFA Collect CAT2</strong>
+                  <span class="sub">Supply 91 · face value USD 1,220 · última venta USD 1,900</span>
+                </div>
+              </td>
+              <td>
+                <div class="price">USD 1,939</div>
+                <div class="sub">Aprox. USD 9,695 por 5 antes de cargos.</div>
+              </td>
+              <td>
+                <span class="chip warn">Verificar ya</span>
+                <div class="sub">Puede haber 5 unidades, pero no necesariamente 5 asientos juntos.</div>
+              </td>
+              <td>
+                <span class="chip ok">Mejor encaje</span>
+                <div class="sub">Está apenas debajo del piso 2k y dentro de la intención de compra.</div>
+              </td>
+              <td>
+                <div class="actions">
+                  <a class="main" href="https://collect.fifa.com/marketplace?tags=cat2-m98&referrer=walix" target="_blank" rel="noreferrer">Collect CAT2</a>
+                  <a href="https://collect.fifa.com/marketplace?tags=cat1-m98&referrer=walix" target="_blank" rel="noreferrer">CAT1</a>
+                  <a href="https://fwc26-resale-usd.tickets.fifa.com/" target="_blank" rel="noreferrer">FIFA Resale</a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fuentes" class="section" aria-labelledby="fuentes-titulo">
+      <div class="section-head">
+        <div>
+          <h2 id="fuentes-titulo">Sistemas de boletos y URLs útiles</h2>
+          <p>Usa estos enlaces para repetir la búsqueda con cantidad 5. En marketplaces secundarios, filtra por “5 tickets”, “together” y entrega oficial móvil.</p>
+        </div>
+      </div>
+
+      <div class="source-grid">
+        <article class="source">
+          <div>
+            <h3>FIFA Resale oficial</h3>
+            <p>Primera opción por seguridad; puede requerir sesión y puede tener límite de boletos por partido.</p>
+          </div>
+          <a href="https://fwc26-resale-usd.tickets.fifa.com/" target="_blank" rel="noreferrer">Abrir resale oficial</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>FIFA Collect Info</h3>
+            <p>Panel público de floor price, supply, face value y últimas ventas por match/categoría.</p>
+          </div>
+          <a href="https://www.fifacollect.info/tickets/world-cup-2026/listings" target="_blank" rel="noreferrer">Abrir panel de precios</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>SeatPick</h3>
+            <p>Agregador con garantías. El sitio bloqueó scraping, así que conviene validar manualmente.</p>
+          </div>
+          <a href="https://seatpick.com/search?search=FIFA%20World%20Cup%202026%20Los%20Angeles%20quarter-final" target="_blank" rel="noreferrer">Buscar LA cuarto</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>StubHub</h3>
+            <p>Marketplace grande; confirma entrega móvil oficial y reemplazo/refund antes de pagar.</p>
+          </div>
+          <a href="https://www.stubhub.com/find/s/?q=FIFA%20World%20Cup%202026%20Match%2098" target="_blank" rel="noreferrer">Buscar M98</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>SeatGeek</h3>
+            <p>Útil para comparar all-in pricing en EE.UU.; revisar si lista cinco juntos.</p>
+          </div>
+          <a href="https://seatgeek.com/search?search=FIFA%20World%20Cup%202026%20Match%2098" target="_blank" rel="noreferrer">Buscar M98</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>Vivid Seats</h3>
+            <p>Secundario con inventario variable; usar solo si entrega y garantía son claras.</p>
+          </div>
+          <a href="https://www.vividseats.com/search?searchTerm=FIFA%20World%20Cup%202026%20Match%2098" target="_blank" rel="noreferrer">Buscar M98</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>TickPick</h3>
+            <p>Comparador secundario con enfoque en precio final; buscar por match number.</p>
+          </div>
+          <a href="https://www.tickpick.com/search?query=FIFA%20World%20Cup%202026%20Match%2098" target="_blank" rel="noreferrer">Buscar M98</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>TicketNetwork</h3>
+            <p>Secundario amplio; no asumir que el precio mostrado incluye todos los cargos.</p>
+          </div>
+          <a href="https://www.ticketnetwork.com/en/tickets/search?q=FIFA%20World%20Cup%202026%20Match%2098" target="_blank" rel="noreferrer">Buscar M98</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>Ticombo</h3>
+            <p>Marketplace entre fans; riesgo mayor. Evitar pagos directos fuera de escrow.</p>
+          </div>
+          <a href="https://www.ticombo.com/en/sports-tickets/football-tickets/fifa-world-cup-2026-tickets" target="_blank" rel="noreferrer">Abrir World Cup</a>
+        </article>
+
+        <article class="source">
+          <div>
+            <h3>TicketKosta / HelloTickets</h3>
+            <p>Útiles como termómetro internacional; suelen estar más caros para knockout.</p>
+          </div>
+          <a href="https://www.ticketkosta.com/en/world-cup-2026-tickets/" target="_blank" rel="noreferrer">Abrir TicketKosta</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="notas-titulo">
+      <div class="section-head">
+        <div>
+          <h2 id="notas-titulo">Notas de compra</h2>
+          <p>Reglas prácticas para no confundir “precio de mercado” con “compra segura de cinco juntos”.</p>
+        </div>
+      </div>
+
+      <div class="notes">
+        <article class="note">
+          <h3>Conclusión por sede</h3>
+          <ul>
+            <li>Azteca 8vo: actualmente caro; vigilar caída a USD 2,500 o menos.</li>
+            <li>LA cuarto: mejor match con el rango; CAT2 visible en USD 1,939.</li>
+            <li>LA R32: baratos comparados con el rango, pero no son 8vos ni 4tos.</li>
+          </ul>
+        </article>
+
+        <article class="note">
+          <h3>Checklist para 5 juntos</h3>
+          <ul>
+            <li>Seleccionar cantidad 5 antes de comparar precio final.</li>
+            <li>Confirmar “seats together” o fila/asientos consecutivos.</li>
+            <li>No aceptar PDFs, capturas, QR sueltos o promesas de transferencia manual.</li>
+          </ul>
+        </article>
+
+        <article class="note">
+          <h3>Riesgo por canal</h3>
+          <p>FIFA oficial y Collect son prioridad. StubHub/SeatGeek/Vivid/TickPick son comparables si la garantía cubre reemplazo real. Redes sociales solo con escrow y transferencia oficial en app.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      Fuentes base: FIFA World Cup 2026 knockout schedule; FIFA Collect Info; FIFA Collect marketplace; búsquedas directas en SeatPick, StubHub, SeatGeek, Vivid Seats, TickPick, TicketNetwork, Ticombo y TicketKosta. No se compró nada ni se ingresaron datos personales.
+    </div>
+  </footer>
+
+  <script>
+    const buttons = Array.from(document.querySelectorAll(".filter"));
+    const rows = Array.from(document.querySelectorAll("#rows tr"));
+    const search = document.querySelector("#search");
+
+    function applyFilters() {
+      const active = document.querySelector(".filter.active")?.dataset.filter || "all";
+      const q = search.value.trim().toLowerCase();
+
+      rows.forEach((row) => {
+        const tags = row.dataset.tags || "";
+        const text = row.innerText.toLowerCase();
+        const tagMatch = active === "all" || tags.includes(active);
+        const textMatch = !q || text.includes(q);
+        row.hidden = !(tagMatch && textMatch);
+      });
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((item) => item.classList.remove("active"));
+        button.classList.add("active");
+        applyFilters();
+      });
+    });
+
+    search.addEventListener("input", applyFilters);
+  </script>
+</body>
+</html>
